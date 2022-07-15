@@ -27,7 +27,7 @@ const executeCommands = (_commands) => {
 }
 
 const rewireWithEnv = ({
-    config,
+    webpackConfig,
     envKey = 'BUILDTIME_ENV',
     vars = {},
     commands = {},
@@ -35,11 +35,11 @@ const rewireWithEnv = ({
     formatter = null
 }) => {
 
-    logger(c => c.cyan('Start executing commands'));
+    logger(c => c.cyan('Baking custom envirnment variables...'));
     debugOn = debug;
     customFormatter = formatter;
 
-    config.plugins = (config.plugins || [])
+    webpackConfig.plugins = (webpackConfig.plugins || [])
         .concat([new webpack.DefinePlugin({
             [`process.env.${envKey}`]: JSON.stringify({
                 ...(Object.keys(vars).length > 0 && vars),
@@ -47,7 +47,7 @@ const rewireWithEnv = ({
             })
         })])
 
-    return config
+    return webpackConfig
 }
 
 export { rewireWithEnv }
