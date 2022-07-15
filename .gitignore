@@ -12,12 +12,11 @@
 /build
 /dist
 
-/wallet-bridge/node_modules
-/libs
-
 # misc
 .DS_Store
-.env
+.env.stage
+.env.prod
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
